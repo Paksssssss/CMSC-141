@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cmsc_141.mp_1;
+package mp1;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,9 +24,9 @@ public class URM {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         URM urm = new URM();
-        String filename = "/home/paks/NetBeansProjects/CMSC_141-MP_1/src/cmsc_141/mp_1/mp_1.in";
+        String filename = "/home/paks/NetBeansProjects/CMSC_141/src/mp1/mp1.in";
         ArrayList urmLines = new ArrayList();
         urmLines = urm.readFile(filename);
         urm.urmSolver(urmLines);
@@ -37,8 +41,13 @@ public class URM {
         return inputList;
     }
     
-    void urmSolver(ArrayList<String> urmCommands){
+    void writeFile(String string) throws IOException{
+        Files.write(Paths.get("/home/paks/NetBeansProjects/CMSC_141/src/output/mp1.out"), string.getBytes());
+    }
+    
+    void urmSolver(ArrayList<String> urmCommands) throws IOException{
         String inputString = urmCommands.get(0).replaceAll("\\s","");
+        String outputString = "";
         char[] urmArrayChar = inputString.toCharArray();
         int[] urmArrayInt = convertToInt(urmArrayChar);
         for(int i = 1; i<urmCommands.size(); ){
@@ -64,8 +73,11 @@ public class URM {
             }
             for(int j = 0 ; j<urmArrayInt.length;j++){
                 System.out.print(urmArrayInt[j]+ " ");
+                outputString += urmArrayInt[j] + " ";
             }
+            outputString += '\n';
             System.out.println("");
+            writeFile(outputString);
         }
     }
     
