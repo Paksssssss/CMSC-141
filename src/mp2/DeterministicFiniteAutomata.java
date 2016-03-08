@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -75,8 +76,10 @@ public class DeterministicFiniteAutomata {
                     isOkay = false;
                     break;
                 }
+                
             }
-            if(isOkay && here.isEmpty()){
+            here.removeAll(Collections.singleton("N"));
+            if(isOkay && here.isEmpty() ){
                 System.out.println("OK");
                 output += "OK" + '\n';
             }
