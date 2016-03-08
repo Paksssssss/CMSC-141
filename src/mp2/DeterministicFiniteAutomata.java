@@ -76,7 +76,7 @@ public class DeterministicFiniteAutomata {
                     break;
                 }
             }
-            if(isOkay){
+            if(isOkay && here.isEmpty()){
                 System.out.println("OK");
                 output += "OK" + '\n';
             }
